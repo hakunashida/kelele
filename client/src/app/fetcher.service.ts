@@ -37,7 +37,6 @@ export class FetcherService {
 
 	getSearchTabs(terms: string) {
 		console.log(terms);
-		console.log(this.domain + '/tabs/search/' + terms);
 		this.http.get<TabsResponse>(this.domain + '/tabs/search/' + terms).subscribe(
 			data => {
 				this.data = data.tabs;
@@ -51,9 +50,9 @@ export class FetcherService {
 
 	handleError(err: HttpErrorResponse) {
   		if (err.error instanceof Error) {
-  			console.log('An error occurred:', err.error.message);
+  			console.error('An error occurred:', err.error.message);
   		} else {
-			console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+			console.error(`Backend returned code ${err.status}, body was: ${err.error}`);
   		}
 	}
 }
