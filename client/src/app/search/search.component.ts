@@ -38,6 +38,6 @@ export class SearchComponent implements OnInit {
 	}
 
 	onSelect(tab: Tab) {
-		this.search.getContent(tab.id).subscribe(content => {})
+		this.search.getContent(tab).subscribe(content => {})
 	}
 }

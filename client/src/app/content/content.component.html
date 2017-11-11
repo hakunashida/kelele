@@ -1,3 +1,6 @@
-<pre>
-{{ tabContent }}
-</pre>
+<div *ngIf="tab">
+	<h1>{{ tab.artist }}: {{ tab.name }}</h1>
+	<pre>
+{{ tab.content }}
+	</pre>
+</div>

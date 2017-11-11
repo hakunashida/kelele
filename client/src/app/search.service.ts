@@ -11,7 +11,7 @@ import { Tab } from '../tab.model';
 export class SearchService {
 
 	private apiRoot = 'http://localhost:8000';
-	private tabContent = new Subject<string>();
+	private tabContent = new Subject<Tab>();
 
 	contentFetched$ = this.tabContent.asObservable();
 
@@ -35,18 +35,18 @@ export class SearchService {
 			});
 	}
 
-	public getContent(tabId: string): Observable<string> {
-		let apiUrl = `${this.apiRoot}/tabs/${tabId}/content`;
+	public getContent(tab: Tab): Observable<Tab> {
+		let apiUrl = `${this.apiRoot}/tabs/${tab.id}/content`;
 		return this.http.get(apiUrl)
 			.map(res => {
-				let content = res['message'];
-				this.fetchContent(content);
-				return content;
+				tab.content = res['message'];
+				this.fetchContent(tab);
+				return tab;
 			})
 			.share();
 	}
 
-	public fetchContent(content: string) {
-		this.tabContent.next(content);
+	public fetchContent(tab: Tab) {
+		this.tabContent.next(tab);
 	}
 }

@@ -1,4 +1,7 @@
 export class Tab {
+
+	public content: string;
+
 	constructor(public id: string,
 				public name: string,
 				public artist: string,
