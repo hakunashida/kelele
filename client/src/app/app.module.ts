@@ -7,11 +7,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { SearchService } from './search.service';
 import { SearchComponent } from './search/search.component';
+import { ContentComponent } from './content/content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
+    ContentComponent,
   ],
   imports: [
     BrowserModule,

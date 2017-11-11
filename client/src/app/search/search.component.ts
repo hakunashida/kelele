@@ -8,39 +8,38 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/do';
 
 import { SearchService } from '../search.service';
+import { Tab } from '../../tab.model';
 
 @Component({
-  selector: 'search',
+  selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
 
 	private loading: boolean = false;
-	// searchValue = '';
-	private results: Observable<Tab[]>;
-	private searchField = FormControl;
+	private results$: Observable<Tab[]>;
+	private searchField: FormControl;
 
 	constructor(private search: SearchService) { }
 
 	ngOnInit() {
 		this.searchField = new FormControl();
-		this.results = this.searchField.valueChanges
+		this.results$ = this.searchField.valueChanges
 			.debounceTime(400)
 			.distinctUntilChanged()
 			.do(_ => this.loading = true)
 			.switchMap(term => this.search.searchTabs(term))
 			.do(_ => this.loading = false)
-		/*this.searchControl.valueChanges
-			.debounceTime(500)
-			.distinctUntilChanged()
-			.subscribe(newValue => {
-				this.searchValue = newValue;
-				this.search.getSearchTabs(this.searchValue);
-			});*/
 	}
 
-	doSearch(term: string) {
+	doSearch(terms: string) {
 		this.search.searchTabs(terms);
+	}
+
+	onSelect(tab: Tab) {
+		this.search.getContent(tab.id).subscribe(content => {
+			// console.log(content);
+		})
 	}
 }

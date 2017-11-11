@@ -11,7 +11,7 @@
 
 <ul class="list-group">
 	<li class="list-group-item"
-		*ngFor="let tab of results | async">
-		<a href="{{tab.url}}" target="_blank">{{ tab.artist }}: {{ tab.name }}</a>
+		*ngFor="let tab of results$ | async">
+		<a (click)="onSelect(tab)" target="_blank">{{ tab.artist }}: {{ tab.name }}</a>
 	</li>
 </ul>
