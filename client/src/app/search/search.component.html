@@ -1,1 +1,17 @@
-<input type="text" placeholder="search for tabs" [value]="searchValue" [formControl]="searchControl">
+<form>
+	<input type="search"
+		class="form-control"
+		placeholder="search for something"
+		[formControl]="searchField">
+</form>
+
+<div class="text-center">
+	<p *ngIf="loading">Loading...</p>
+</div>
+
+<ul class="list-group">
+	<li class="list-group-item"
+		*ngFor="let tab of results | async">
+		<a href="{{tab.url}}" target="_blank">{{ tab.artist }}: {{ tab.name }}</a>
+	</li>
+</ul>
