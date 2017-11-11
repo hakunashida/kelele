@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { PreloadAllModules } from '@angular/router';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MainComponent } from './main/main.component';
@@ -6,7 +7,8 @@ import { PageNotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes: Routes = [
 	{ path: '', component: MainComponent },
-    { path: '**', component: PageNotFoundComponent }
+	{ path: 'tab/:artist/:name', component: MainComponent },
+    { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
@@ -14,7 +16,8 @@ const appRoutes: Routes = [
 		RouterModule.forRoot(
 		    appRoutes,
 		    {
-		    	enableTracing: false
+		    	enableTracing: false,
+		    	preloadingStrategy: PreloadAllModules,
 		    },
 		),
 	],

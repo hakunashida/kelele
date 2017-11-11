@@ -35,6 +35,24 @@ export class SearchService {
 			});
 	}
 
+	public getTab(artist: string, name: string): Observable<Tab[]> {
+		let apiUrl = `${this.apiRoot}/tabs/artist/${artist}/name/${name}`;
+		return this.http.get(apiUrl)
+			.map(res => {
+				return res['tabs'].map(item => {
+					return new Tab(
+						item.id,
+						item.name,
+						item.artist,
+						item.url,
+						item.ipfs_hash,
+						item.page_views,
+						item.rating,
+					);
+				});
+			});
+	}
+
 	public getContent(tab: Tab): Observable<Tab> {
 		let apiUrl = `${this.apiRoot}/tabs/${tab.id}/content`;
 		return this.http.get(apiUrl)
