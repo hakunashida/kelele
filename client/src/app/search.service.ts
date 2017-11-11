@@ -47,7 +47,6 @@ export class SearchService {
 	}
 
 	public fetchContent(content: string) {
-		// console.log(content);
 		this.tabContent.next(content);
 	}
 }

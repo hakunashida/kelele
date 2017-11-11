@@ -15,9 +15,7 @@ export class ContentComponent implements OnDestroy {
 
 	constructor(private search: SearchService) {
 		this.subscription = search.contentFetched$.subscribe(
-			content => { 
-				console.log(content);
-				this.tabContent = content }
+			content => { this.tabContent = content }
 		);
 	}
 
