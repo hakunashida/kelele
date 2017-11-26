@@ -18,6 +18,7 @@ import { Tab } from '../../tab.model';
 export class SearchComponent implements OnInit {
 
 	private loading: boolean = false;
+	private serverError: boolean = false;
 	private results$: Observable<Tab[]>;
 	private searchField: FormControl;
 
@@ -31,6 +32,11 @@ export class SearchComponent implements OnInit {
 			.do(_ => this.loading = true)
 			.switchMap(term => this.search.searchTabs(term))
 			.do(_ => this.loading = false)
+			.catch(err => {
+				this.loading = false;
+				this.serverError = true;
+				return Observable.throw(err || 'backend server error');
+			});
 	}
 
 	doSearch(terms: string) {

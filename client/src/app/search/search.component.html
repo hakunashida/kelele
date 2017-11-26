@@ -5,9 +5,8 @@
 		[formControl]="searchField">
 </form>
 
-<div class="text-center">
-	<p *ngIf="loading">Loading...</p>
-</div>
+<p *ngIf="loading">Loading...</p>
+<p *ngIf="serverError">Error: Could not reach the server</p>
 
 <ul class="list-group">
 	<li class="list-group-item"

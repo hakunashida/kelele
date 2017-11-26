@@ -20,14 +20,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(cors());
 
-const server = http.createServer(app);
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
-// do i need socket io?
-/*const io = require('socket.io')(server);
-io.set("origins", "*:*");
-io.on('connection', function(socket) {
-	api.onSocketConnected(socket, indexer);
-});*/
+const server = http.createServer(app);
 
 server.listen(port, function() {
 	console.log('App listening on port ' + port);
